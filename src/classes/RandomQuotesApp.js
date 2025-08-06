@@ -4,6 +4,7 @@ class RandomQuotesApp {
     this.randomQuoteBtn = document.getElementById("random-quote-btn");
     this.quoteTextElement = document.getElementById("quote-text");
     this.quoteAuthorElement = document.getElementById("quote-author");
+    this.randomQuoteAPIBtn = document.getElementById("random-quote-api-btn");
     this.currentQuote = null;
     this.init();
   }
@@ -17,9 +18,15 @@ class RandomQuotesApp {
     this.currentQuote = randomQuote;
     this.displayCurrentQuote();
   }
+  getRandomQuoteViaAPI() {
+    RandomQuote.getRandomQuoteViaApi();
+  }
 
   init() {
     this.randomQuoteBtn.addEventListener("click", () => this.getRandomQuote());
+    this.randomQuoteAPIBtn.addEventListener("click", () =>
+      this.getRandomQuoteViaAPI()
+    );
   }
 }
 export default RandomQuotesApp;
