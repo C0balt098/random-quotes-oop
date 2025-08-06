@@ -6,6 +6,10 @@ const sequelize = new Sequelize({
 });
 
 const Quote = sequelize.define("Quote", {
+  id: {
+    type: DataTypes.STRING(10),
+    primaryKey: true,
+  },
   text: {
     type: DataTypes.STRING,
     allowNull: false,

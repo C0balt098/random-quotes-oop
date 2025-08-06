@@ -1,10 +1,17 @@
 // server/seed.js
 const {Quote, sequelize} = require("./models/Quote");
+const {customAlphabet} = require("nanoid");
+
+// Base62: цифры + заглавные и строчные буквы (всего 62 символа)
+const nanoid = customAlphabet(
+  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+  6
+);
 
 const seed = async () => {
   await sequelize.sync({force: true});
 
-  await Quote.bulkCreate([
+  const quotesData = [
     {
       text: "Be yourself; everyone else is already taken.",
       author: "Oscar Wilde",
@@ -73,9 +80,16 @@ const seed = async () => {
       text: "You are never too old to set another goal or to dream a new dream.",
       author: "C.S. Lewis",
     },
-  ]);
+  ];
 
-  console.log("✅ 20 quotes inserted successfully.");
+  const quotesWithId = quotesData.map((quote) => ({
+    ...quote,
+    id: nanoid(),
+  }));
+
+  await Quote.bulkCreate(quotesWithId);
+
+  console.log("✅ 20 quotes inserted with unique 6-char IDs.");
   process.exit();
 };
 

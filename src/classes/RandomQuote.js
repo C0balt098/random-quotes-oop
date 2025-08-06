@@ -11,9 +11,9 @@ class RandomQuote {
     fetch("http://localhost:3000/api/quote")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data); // или вставь в DOM
+        console.log(data); 
       })
-      .catch((err) => console.error("Ошибка:", err));
+      .catch((err) => console.error("Error:", err));
   }
 }
 
